@@ -43,11 +43,10 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    brightness = 0
+    brightness = 4
     for (let index = 0; index <= 5; index++) {
         brightness += 50
         led.plotBrightness(column, row, brightness)
         basic.pause(100)
     }
-    brightness = 250
 })
