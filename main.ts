@@ -8,6 +8,7 @@ input.onButtonPressed(Button.A, function () {
     }
     led.toggle(column, row)
     combination[row] = column
+    movement = 1
 })
 input.onButtonPressed(Button.B, function () {
     music.playTone(220, music.beat(BeatFraction.Eighth))
@@ -20,6 +21,7 @@ input.onButtonPressed(Button.B, function () {
 })
 let brightness = 0
 let correct = 0
+let movement = 0
 let combination: number[] = []
 let row = 0
 let column = 0
@@ -27,6 +29,7 @@ column = 0
 row = 0
 combination = [0, 0, 0, 0, 0]
 let target = [2, 3, 1, 4, 1]
+movement = 0
 basic.forever(function () {
     correct = 0
     for (let index = 0; index <= 4; index++) {
@@ -37,6 +40,10 @@ basic.forever(function () {
     if (correct == 5) {
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 0)
+        if (movement == 1) {
+            music.startMelody(music.builtInMelody(Melodies.Punchline), MelodyOptions.Once)
+            movement = 0
+        }
     } else {
         pins.digitalWritePin(DigitalPin.P1, 1)
         pins.digitalWritePin(DigitalPin.P0, 0)
